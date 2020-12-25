@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option go_package = "2020_2-Sistemas_Distribuidos/Tarea2/datanode_datanode";
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.helloworld";
+//option java_outer_classname = "HelloWorldProto";
+
+package datanode_datanode;
+
+service Greeter {
+    rpc Savechunk (stream Book) returns (Result) {}
+    rpc Showme (Distribution) returns (Problems) {}
+    rpc Ricart (Node) returns (NoNode) {}
+    rpc Check2 (Ping) returns (Pong) {}
+}
+
+message Book {
+    string name = 1;
+    string part = 2;
+    bytes chunk = 3;
+}
+
+message Result {
+    string msg = 1;
+}
+
+message Distribution {
+	string who = 1;
+    string chunk1 = 2;
+    string chunk2 = 3;
+    string chunk3 = 4;
+}
+
+message Problems {
+	string dn1 = 1;
+    string dn2 = 2;
+    string dn3 = 3;
+}
+
+message Node {
+    string who = 1;
+}
+
+message NoNode {
+    string msg = 1;
+}
+
+message Ping {
+    string p = 1;
+}
+
+message Pong {
+    string p = 1;
+}

@@ -1,0 +1,25 @@
+id, tipo,valor,intento,entregado,balance
+1,prioritario,15,2,No,-5.500000
+2,prioritario,8,1,No,2.400000
+4,normal,10,1,Si,10.000000
+3,normal,10,1,Si,10.000000
+5,prioritario,15,1,Si,15.000000
+6,prioritario,8,1,Si,8.000000
+9,prioritario,15,1,Si,15.000000
+10,prioritario,8,1,No,2.400000
+13,prioritario,15,1,Si,15.000000
+14,prioritario,8,1,Si,8.000000
+17,prioritario,15,1,Si,15.000000
+18,prioritario,8,1,Si,8.000000
+21,prioritario,15,2,Si,5.000000
+22,prioritario,8,1,Si,8.000000
+25,prioritario,15,1,Si,15.000000
+26,prioritario,8,1,Si,8.000000
+29,prioritario,15,1,Si,15.000000
+30,prioritario,8,1,Si,8.000000
+33,prioritario,15,2,Si,5.000000
+34,prioritario,8,1,Si,8.000000
+37,prioritario,15,1,Si,15.000000
+38,prioritario,8,1,Si,8.000000
+41,prioritario,15,1,Si,15.000000
+42,prioritario,8,1,No,2.400000

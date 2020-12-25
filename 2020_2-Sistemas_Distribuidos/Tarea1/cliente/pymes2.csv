@@ -1,0 +1,5 @@
+id,producto,valor,tienda,destino,prioritario
+BE127,Secador de pelo,15,pyme,casa-K,1
+BE666,Jabón para la ducha,8,pyme,casa-A,1
+BE855,Acondicionador,10,pyme,casa-A,0
+BE654,Shampoo,10,pyme,casa-D,0

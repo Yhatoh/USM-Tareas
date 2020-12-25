@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "2020_2-Sistemas_Distribuidos/Tarea2/client_datanode";
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.helloworld";
+//option java_outer_classname = "HelloWorldProto";
+
+package client_datanode;
+
+service Greeter {
+    rpc Upload (stream Book) returns (Result) {}
+    rpc GimmeChunk (Chunkpart) returns (Chunk) {}
+}
+
+message Book {
+    string name = 1;
+    string part = 2;
+    bytes chunk = 3;
+}
+
+message Result {
+    string msg = 1;
+}
+
+message Chunkpart {
+    string id = 1;
+    string name = 2;
+}
+
+message Chunk {
+    bytes msg = 1;
+}

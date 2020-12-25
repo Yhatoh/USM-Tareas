@@ -1,0 +1,17 @@
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+1,prioritario,15,pyme,casa-K,2,0
+2,prioritario,8,pyme,casa-A,1,0
+9,prioritario,15,pyme,casa-K,1,2020-11-19 14:42:08
+10,prioritario,8,pyme,casa-A,1,0
+21,prioritario,15,pyme,casa-K,2,2020-11-19 14:42:18
+22,prioritario,8,pyme,casa-A,1,2020-11-19 14:42:18
+33,prioritario,15,pyme,casa-K,2,2020-11-19 14:42:28
+34,prioritario,8,pyme,casa-A,1,2020-11-19 14:42:28

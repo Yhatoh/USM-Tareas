@@ -1,0 +1,88 @@
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+2020-11-19 14:37:56,1,prioritario,Secador de pelo,15,pyme,casa-K,1
+2020-11-19 14:37:56,2,prioritario,Jabón para la ducha,8,pyme,casa-A,2
+2020-11-19 14:37:56,3,normal,Acondicionador,10,pyme,casa-A,3
+2020-11-19 14:37:56,4,normal,Shampoo,10,pyme,casa-D,4
+timestamp,id-paquete,tipo,nombre,valor,origen,destino,seguimiento
+2020-11-19 14:41:47,1,prioritario,Secador de pelo,15,pyme,casa-K,1
+2020-11-19 14:41:47,2,prioritario,Jabón para la ducha,8,pyme,casa-A,2
+2020-11-19 14:41:47,3,normal,Acondicionador,10,pyme,casa-A,3
+2020-11-19 14:41:47,4,normal,Shampoo,10,pyme,casa-D,4
+2020-11-19 14:41:49,5,prioritario,Secador de pelo,15,pyme,casa-K,5
+2020-11-19 14:41:50,6,prioritario,Jabón para la ducha,8,pyme,casa-A,6
+2020-11-19 14:41:50,7,normal,Acondicionador,10,pyme,casa-A,7
+2020-11-19 14:41:50,8,normal,Shampoo,10,pyme,casa-D,8
+2020-11-19 14:41:52,9,prioritario,Secador de pelo,15,pyme,casa-K,9
+2020-11-19 14:41:52,10,prioritario,Jabón para la ducha,8,pyme,casa-A,10
+2020-11-19 14:41:52,11,normal,Acondicionador,10,pyme,casa-A,11
+2020-11-19 14:41:52,12,normal,Shampoo,10,pyme,casa-D,12
+2020-11-19 14:41:54,13,prioritario,Secador de pelo,15,pyme,casa-K,13
+2020-11-19 14:41:54,14,prioritario,Jabón para la ducha,8,pyme,casa-A,14
+2020-11-19 14:41:54,15,normal,Acondicionador,10,pyme,casa-A,15
+2020-11-19 14:41:54,16,normal,Shampoo,10,pyme,casa-D,16
+2020-11-19 14:41:56,17,prioritario,Secador de pelo,15,pyme,casa-K,17
+2020-11-19 14:41:56,18,prioritario,Jabón para la ducha,8,pyme,casa-A,18
+2020-11-19 14:41:56,19,normal,Acondicionador,10,pyme,casa-A,19
+2020-11-19 14:41:56,20,normal,Shampoo,10,pyme,casa-D,20
+2020-11-19 14:41:59,21,prioritario,Secador de pelo,15,pyme,casa-K,21
+2020-11-19 14:41:59,22,prioritario,Jabón para la ducha,8,pyme,casa-A,22
+2020-11-19 14:41:59,23,normal,Acondicionador,10,pyme,casa-A,23
+2020-11-19 14:41:59,24,normal,Shampoo,10,pyme,casa-D,24
+2020-11-19 14:42:01,25,prioritario,Secador de pelo,15,pyme,casa-K,25
+2020-11-19 14:42:01,26,prioritario,Jabón para la ducha,8,pyme,casa-A,26
+2020-11-19 14:42:01,27,normal,Acondicionador,10,pyme,casa-A,27
+2020-11-19 14:42:01,28,normal,Shampoo,10,pyme,casa-D,28
+2020-11-19 14:42:03,29,prioritario,Secador de pelo,15,pyme,casa-K,29
+2020-11-19 14:42:03,30,prioritario,Jabón para la ducha,8,pyme,casa-A,30
+2020-11-19 14:42:03,31,normal,Acondicionador,10,pyme,casa-A,31
+2020-11-19 14:42:03,32,normal,Shampoo,10,pyme,casa-D,32
+2020-11-19 14:42:05,33,prioritario,Secador de pelo,15,pyme,casa-K,33
+2020-11-19 14:42:05,34,prioritario,Jabón para la ducha,8,pyme,casa-A,34
+2020-11-19 14:42:05,35,normal,Acondicionador,10,pyme,casa-A,35
+2020-11-19 14:42:06,36,normal,Shampoo,10,pyme,casa-D,36
+2020-11-19 14:42:08,37,prioritario,Secador de pelo,15,pyme,casa-K,37
+2020-11-19 14:42:08,38,prioritario,Jabón para la ducha,8,pyme,casa-A,38
+2020-11-19 14:42:08,39,normal,Acondicionador,10,pyme,casa-A,39
+2020-11-19 14:42:08,40,normal,Shampoo,10,pyme,casa-D,40
+2020-11-19 14:42:10,41,prioritario,Secador de pelo,15,pyme,casa-K,41
+2020-11-19 14:42:10,42,prioritario,Jabón para la ducha,8,pyme,casa-A,42
+2020-11-19 14:42:10,43,normal,Acondicionador,10,pyme,casa-A,43
+2020-11-19 14:42:10,44,normal,Shampoo,10,pyme,casa-D,44
+2020-11-19 14:42:12,45,prioritario,Secador de pelo,15,pyme,casa-K,45
+2020-11-19 14:42:12,46,prioritario,Jabón para la ducha,8,pyme,casa-A,46
+2020-11-19 14:42:12,47,normal,Acondicionador,10,pyme,casa-A,47
+2020-11-19 14:42:12,48,normal,Shampoo,10,pyme,casa-D,48
+2020-11-19 14:42:14,49,prioritario,Secador de pelo,15,pyme,casa-K,49
+2020-11-19 14:42:14,50,prioritario,Jabón para la ducha,8,pyme,casa-A,50
+2020-11-19 14:42:15,51,normal,Acondicionador,10,pyme,casa-A,51
+2020-11-19 14:42:15,52,normal,Shampoo,10,pyme,casa-D,52
+2020-11-19 14:42:17,53,prioritario,Secador de pelo,15,pyme,casa-K,53
+2020-11-19 14:42:17,54,prioritario,Jabón para la ducha,8,pyme,casa-A,54
+2020-11-19 14:42:17,55,normal,Acondicionador,10,pyme,casa-A,55
+2020-11-19 14:42:17,56,normal,Shampoo,10,pyme,casa-D,56
+2020-11-19 14:42:19,57,prioritario,Secador de pelo,15,pyme,casa-K,57
+2020-11-19 14:42:19,58,prioritario,Jabón para la ducha,8,pyme,casa-A,58
+2020-11-19 14:42:19,59,normal,Acondicionador,10,pyme,casa-A,59
+2020-11-19 14:42:19,60,normal,Shampoo,10,pyme,casa-D,60
+2020-11-19 14:42:21,61,prioritario,Secador de pelo,15,pyme,casa-K,61
+2020-11-19 14:42:21,62,prioritario,Jabón para la ducha,8,pyme,casa-A,62
+2020-11-19 14:42:21,63,normal,Acondicionador,10,pyme,casa-A,63
+2020-11-19 14:42:21,64,normal,Shampoo,10,pyme,casa-D,64
+2020-11-19 14:42:24,65,prioritario,Secador de pelo,15,pyme,casa-K,65
+2020-11-19 14:42:24,66,prioritario,Jabón para la ducha,8,pyme,casa-A,66
+2020-11-19 14:42:24,67,normal,Acondicionador,10,pyme,casa-A,67
+2020-11-19 14:42:24,68,normal,Shampoo,10,pyme,casa-D,68
+2020-11-19 14:42:26,69,prioritario,Secador de pelo,15,pyme,casa-K,69
+2020-11-19 14:42:26,70,prioritario,Jabón para la ducha,8,pyme,casa-A,70
+2020-11-19 14:42:26,71,normal,Acondicionador,10,pyme,casa-A,71
+2020-11-19 14:42:26,72,normal,Shampoo,10,pyme,casa-D,72
+2020-11-19 14:42:28,73,prioritario,Secador de pelo,15,pyme,casa-K,73
+2020-11-19 14:42:28,74,prioritario,Jabón para la ducha,8,pyme,casa-A,74
+2020-11-19 14:42:28,75,normal,Acondicionador,10,pyme,casa-A,75
+2020-11-19 14:42:28,76,normal,Shampoo,10,pyme,casa-D,76

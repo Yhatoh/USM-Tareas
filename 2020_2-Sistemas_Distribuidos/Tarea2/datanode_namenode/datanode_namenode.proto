@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "2020_2-Sistemas_Distribuidos/Tarea2/datanode_namenode";
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.helloworld";
+//option java_outer_classname = "HelloWorldProto";
+
+package datanode_namenode;
+
+service Greeter {
+    rpc Propose (Distribution) returns (Accepted) {}
+    rpc Proposedis (Distribution) returns (Distribution) {}
+    rpc Check (Ping) returns (Pong) {}
+}
+
+message Distribution {
+	string name = 1;
+    string chunk1 = 2;
+    string chunk2 = 3;
+    string chunk3 = 4;
+}
+
+message Accepted {
+    string chunk1 = 1;
+    string chunk2 = 2;
+    string chunk3 = 3;
+}
+
+message Ping {
+	string msg = 1;
+}
+
+message Pong {
+	string msg = 1;
+}

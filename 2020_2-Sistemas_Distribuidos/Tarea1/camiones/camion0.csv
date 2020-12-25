@@ -1,0 +1,10 @@
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+id-paquete,tipo,valor,origen,destino,intentos,fecha-entrega
+4,normal,10,pyme,casa-D,1,2020-11-19 14:41:58
+3,normal,10,pyme,casa-A,1,2020-11-19 14:41:58
+13,prioritario,15,pyme,casa-K,1,2020-11-19 14:42:08
+14,prioritario,8,pyme,casa-A,1,2020-11-19 14:42:08
+25,prioritario,15,pyme,casa-K,1,2020-11-19 14:42:18
+26,prioritario,8,pyme,casa-A,1,2020-11-19 14:42:18
+37,prioritario,15,pyme,casa-K,1,2020-11-19 14:42:28
+38,prioritario,8,pyme,casa-A,1,2020-11-19 14:42:28

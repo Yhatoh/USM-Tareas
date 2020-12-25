@@ -1,0 +1,34 @@
+id,producto,valor,tienda,destino,prioritario
+BE127,Secador de pelo,15,pyme,casa-K,1
+BE666,Jabón para la ducha,8,pyme,casa-A,1
+BE855,Acondicionador,10,pyme,casa-A,0
+BE654,Shampoo,10,pyme,casa-D,0
+BE785,Crema para peinar,8,pyme,casa-E,1
+PF654,Placa madre,50,pyme,casa-B,1
+PF125,Procesador R,75,pyme,casa-N,0
+PF111,Ventilador,10,pyme,casa-N,1
+PF245,Gabinete,20,pyme,casa-S,0
+PF225,Fuente de poder,25,pyme,casa-P,1
+PF354,Memoria RAM,22,pyme,casa-R,0
+PF542,Procesador I,90,pyme,casa-N,0
+PF452,Tarjeta de video,115,pyme,casa-I,1
+OF352,Set de plumones,9,pyme,casa-C,1
+OF754,Cuadernos,5,pyme,casa-C,0
+OF554,Lapices,4,pyme,casa-I,0
+DE123,Zapatillas de futbol,16,pyme,casa-E,0
+DE654,Pelota de futbol,11,pyme,casa-V,1
+DE786,Raqueta de tenis,15,pyme,casa-Z,1
+DE245,Palo de golf,18,pyme,casa-Y,1
+CC122,Polera,9,pyme,casa-F,0
+CC147,Pantalón,11,pyme,casa-C,1
+CC124,Abrigo,17,pyme,casa-U,0
+CC175,Bufanda,6,pyme,casa-A,1
+CC121,Chaqueta,16,pyme,casa-X,0
+CC147,Sueter,14,pyme,casa-C,1
+CC121,Pantalón,10,pyme,casa-A,0
+CC454,Polera,7,pyme,casa-Q,0
+GG257,Pistachos: 200 g,4,pyme,casa-B,0
+GG124,Mani: 1 Kg,5,pyme,casa-A,0
+GG568,Almendras: 500 g,5,pyme,casa-L,0
+GG301,Chia: 500 g,6,pyme,casa-D,0
+GG458,Arroz: 1 Kg,3,pyme,casa-C,1

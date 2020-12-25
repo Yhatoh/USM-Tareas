@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "2020_2-Sistemas_Distribuidos/Tarea2/client_namenode";
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.helloworld";
+//option java_outer_classname = "HelloWorldProto";
+
+package client_namenode;
+
+service Greeter {
+    rpc GimmePartsDirections (Book) returns (Result) {}
+    rpc GimmeBooks (Result) returns (stream Book) {}
+}
+
+message Book {
+    string name = 1;
+}
+
+message Result {
+    string msg = 1;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "tarea1/tunel2";
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.helloworld";
+//option java_outer_classname = "HelloWorldProto";
+
+package tracing2;
+
+service Greeter {
+    rpc GimmePacket (Truck) returns (Packet) {}
+    rpc ImBack (Packet) returns (Tick) {}
+}
+
+message Packet {
+    int32 id = 1;
+    string types = 2;
+    int32 value = 3;
+    string origin = 4;
+    string dest = 5;
+    string trys = 6;
+    string date = 7;
+}
+
+message Truck {
+    int32 types = 1;
+}
+
+message Tick {
+    int32 ok = 1;
+}
