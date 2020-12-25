@@ -1,0 +1,91 @@
+{% extends 'plant.html' %}
+
+{% block titulo %}
+<div class="row">
+	<div class="col-md-12">
+		<br>
+		<center><h2>Crea tu equipo!</h2></center>
+	</div>
+</div>	
+{% endblock %}
+
+{% block contenido %}
+<center>
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-5">
+		{% if error %}
+		<p class="text-warning">Tu equipo no puede tener cartas repetidas :c</p>
+		{% endif %}
+
+		{% if nocartas %}
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="sobres" name="sobres">
+					<button type="submit" class="btn btn-outline-secondary btn-lg btn-block">No tienes cartas suficientes :ccc Abre sobres!</button>
+			</form>
+		{% else %}
+		<form role = "form" method = "post">
+			<fieldset class="form-group">
+
+				<div class="form-group">
+					<select class="form-control" id="example" value=carta1 name="carta1">
+						{% for i in lista %}
+						<option value='{{i.carta.id}}'>{{i.carta}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control" id="example" value=carta2 name="carta2">
+						{% for i in lista %}
+						<option value='{{i.carta.id}}'>{{i.carta}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control" id="example" value=carta3 name="carta3">
+						{% for i in lista %}
+						<option value={{i.carta.id}}>{{i.carta}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control" id="example" value=carta4 name="carta4">
+						{% for i in lista %}
+						<option value='{{i.carta.id}}'>{{i.carta}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<select class="form-control" id="example" value=carta5 name="carta5">
+						{% for i in lista %}
+						<option value='{{i.carta.id}}'>{{i.carta}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<input type="hidden" value="{{user.username}}" name="jugador">
+				{% csrf_token %}
+
+				<button type="submit" class="btn btn-outline-secondary" id = "login">Crea tu equipo</button>
+
+			</fieldset>
+		</form>
+		{% endif %}
+	</div>
+	<div class="col-md-5">
+		<center><img src="/media/guerrero.png" width ="225px"></img></center>
+	</div>
+	<div class="col-md-1"></div>
+</div>
+</center>
+
+<div class="row">
+	<div class="col-md-12">
+		<center><a href="http://diazstone.jorgediaz.site/home/"><button href="http://diazstone.jorgediaz.site/home/" class="btn btn-outline-secondary">Home</button></a></center>
+	</div>
+</div>
+{% endblock %}

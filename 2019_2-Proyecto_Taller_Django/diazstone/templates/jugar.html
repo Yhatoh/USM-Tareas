@@ -1,0 +1,298 @@
+{% extends 'plant.html' %}
+
+{% block titulo %}
+<div class="row">
+	<div class="col-md-12">
+		<br>
+		<center><h2>Combates Epicos</h2></center>
+	</div>
+</div>	
+{% endblock %}
+
+{% block contenido %}
+
+{% if jug %}
+	<br>
+	<br>
+	<div class="row">
+		{% if victoriap %}
+		<div class="col-md-12">
+			<center>
+				<h1>GANASTE SIIIII SI GANASTE SI SI SI GANASTE</h1>
+			</center>
+		</div>
+		{% else %}
+			{% if victoriac %}
+			<div class="col-md-12">
+				<center>
+					<h1>En veces ay ke desir pusha la cuestion y seguir adelante...</h1>
+				</center>
+			</div>
+			{% else %}
+				<div class="col-md-5">
+					<center>
+						<h1>{{jug}}</h1>
+					</center>
+				</div>
+				<div class="col-md-2">
+					<center>
+						<h1>vs</h1>
+					</center>
+				</div>
+				<div class="col-md-5">
+					<center>
+						<h1>{{ene}}</h1>
+					</center>
+				</div>
+			{% endif %}
+		{% endif %}
+	</div>
+	<div class="row">
+		<div class="col-md-5">
+			<center>
+			{% if victoriap %}
+				<img src="/media/fiesta2.png" width ="250px"></img>
+			{% else %}
+				{% if victoriac %}
+					<img src="/media/triste2.png" width ="250px"></img>
+				{% else %}
+					{% if cartajug0 != "-1" %}
+						{% if cartajug0 != "-2" %}
+							<form role = "form" method = "post" style="display: inline-block;">
+								<fieldset>
+									<input type="hidden" value="{{cartajug}}" name="cartajug">
+									<input type="hidden" value="{{cartaene}}" name="cartaene">
+									<input type="hidden" value="{{ene}}" name="ene">
+									<input type="hidden" value="0" name="carta">
+									<input type="hidden" value="{{pv}}" name="pv">
+									<input type="hidden" value="{{pc}}" name="pc">
+
+									{% csrf_token %}
+										<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src={{cartajug0}} width ="125px"></img></button>
+								</fieldset>
+							</form>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartajug1 != "-1" %}
+						{% if cartajug1 != "-2" %}
+							<form role = "form" method = "post" style="display: inline-block;">
+								<fieldset>
+									<input type="hidden" value="{{cartajug}}" name="cartajug">
+									<input type="hidden" value="{{cartaene}}" name="cartaene">
+									<input type="hidden" value="{{ene}}" name="ene">
+									<input type="hidden" value="1" name="carta">
+									<input type="hidden" value="{{pv}}" name="pv">
+									<input type="hidden" value="{{pc}}" name="pc">
+
+									{% csrf_token %}
+										<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src={{cartajug1}} width ="125px"></img></button>
+								</fieldset>
+							</form>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}			
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartajug2 != "-1" %}
+						{% if cartajug2 != "-2" %}
+							<form role = "form" method = "post" style="display: inline-block;">
+								<fieldset>
+									<input type="hidden" value="{{cartajug}}" name="cartajug">
+									<input type="hidden" value="{{cartaene}}" name="cartaene">
+									<input type="hidden" value="{{ene}}" name="ene">
+									<input type="hidden" value="2" name="carta">
+									<input type="hidden" value="{{pv}}" name="pv">
+									<input type="hidden" value="{{pc}}" name="pc">
+
+									{% csrf_token %}
+										<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src={{cartajug2}} width ="125px"></img></button>
+
+								</fieldset>
+							</form>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}	
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartajug3 != "-1" %}
+						{% if cartajug3 != "-2" %}
+							<form role = "form" method = "post" style="display: inline-block;">
+								<fieldset>
+									<input type="hidden" value="{{cartajug}}" name="cartajug">
+									<input type="hidden" value="{{cartaene}}" name="cartaene">
+									<input type="hidden" value="{{ene}}" name="ene">
+									<input type="hidden" value="3" name="carta">
+									<input type="hidden" value="{{pv}}" name="pv">
+									<input type="hidden" value="{{pc}}" name="pc">
+
+									{% csrf_token %}
+										<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src={{cartajug3}} width ="125px"></img></button>
+								
+								</fieldset>
+							</form>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartajug4 != "-1" %}
+						{% if cartajug4 != "-2" %}
+							<form role = "form" method = "post" style="display: inline-block;">
+								<fieldset>
+									<input type="hidden" value="{{cartajug}}" name="cartajug">
+									<input type="hidden" value="{{cartaene}}" name="cartaene">
+									<input type="hidden" value="{{ene}}" name="ene">
+									<input type="hidden" value="4" name="carta">
+									<input type="hidden" value="{{pv}}" name="pv">
+									<input type="hidden" value="{{pc}}" name="pc">
+
+									{% csrf_token %}
+										<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src={{cartajug4}} width ="125px"></img></button>
+								</fieldset>
+							</form>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+				{% endif %}
+			{% endif %}
+			</center>
+		</div>
+		<div class="col-md-2">
+			<center>
+				<h1>{{pv}}-{{pc}}</h1>
+				{% if nombrevic %}
+					<h3>{{nombrevic}}</h3> 
+					<h3>mato a</h3> 
+					<h3>{{nombreper}}</h3>
+				{% endif %}
+			</center>
+		</div>
+		<div class="col-md-5">
+			<center>
+			{% if victoriap %}
+				<img src="/media/triste2.png" width ="250px"></img>
+			{% else %}
+				{% if victoriac %}
+					<img src="/media/fiesta2.png" width ="250px"></img>
+				{% else %}
+					{% if cartaene0 != "-1" %}
+						{% if cartaene0 != "-2" %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;"><img src={{cartaene0}} width ="125px"></img></button>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartaene1 != "-1" %}
+						{% if cartaene1 != "-2" %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;"><img src={{cartaene1}} width ="125px"></img></button>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartaene2 != "-1" %}
+						{% if cartaene2 != "-2" %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;"><img src={{cartaene2}} width ="125px"></img></button>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartaene3 != "-1" %}
+						{% if cartaene3 != "-2" %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;"><img src={{cartaene3}} width ="125px"></img></button>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+					{% if cartaene4 != "-1" %}
+						{% if cartaene4 != "-2" %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;"><img src={{cartaene4}} width ="125px"></img></button>
+						{% else %}
+							<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/triste2.png" width ="125px"></img></button>
+						{% endif %}
+					{% else %}
+						<button type="submit" id = "carta" style="color: transparent; background-color: transparent; border-color: transparent;"><img src="/media/fiesta2.png" width ="125px"></img></button>
+					{% endif %}
+				{% endif %}
+			{% endif %}
+			</center>
+		</div>
+	</div>
+{% else %}
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-6">
+			<center>
+				{% if nomazo %}
+				
+				<form method="POST" role ="form" action= ".">
+					{% csrf_token %}
+						<input type="hidden" value="mazo" name="mazo">
+						<button type="submit" class="btn btn-outline-secondary btn-lg btn-block">OYE AMIGO NO TIENES MAZO, ANDA A CREARTE UN MAZO PRIMERO SIIIII!</button>
+				</form>
+				{% else %}
+				<form method="POST" role ="form" action= ".">
+					{% csrf_token %}
+						<input type="hidden" value="juego" name="juego">
+						<button type="submit" class="btn btn-outline-secondary btn-lg btn-block">ENFRENTATE CONTRA OTROS GUERREROS!</button>
+				</form>
+				{% endif %}
+			</center>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+{% endif %}
+	
+{% if m1 %}
+<div class="row">
+	<div class="col-md-6">
+		<center><a href="http://127.0.0.1:8000/home"><button href="http://127.0.0.1:8000/" class="btn btn-outline-secondary">Home</button></a></center>
+	</div>
+
+	<div class="col-md-6">
+		<center>
+			<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="juego" name="juego">
+					<button type="submit" class="btn btn-outline-secondary">VOLVER A JUGAR!</button>
+			</form>
+		</center>
+	</div>
+</div>
+{% else %}
+<div class="row">
+	<div class="col-md-12">
+		<center><a href="http://diazstone.jorgediaz.site/home/"><button href="http://diazstone.jorgediaz.site/home/" class="btn btn-outline-secondary">Home</button></a></center>
+	</div>
+</div>
+
+{% endif %}
+
+{% endblock %}

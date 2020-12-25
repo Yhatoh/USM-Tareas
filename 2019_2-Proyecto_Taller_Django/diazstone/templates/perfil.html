@@ -1,0 +1,47 @@
+{% extends 'plant.html' %}
+
+{% block titulo %}
+<br>
+<br>
+<br>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-5">
+		<center>
+			<form method="post" role="form">
+  				<fieldset>
+					<div class="form-group">
+		      			<select class="form-control" name="aaa" value="aaa" id="exampleSelect1">
+							<option value="/media/maguito1.png">Maguito Negro</option>
+							<option value="/media/maguito2.png">Maguito Azul</option>
+							<option value="/media/maguito3.png">Maguito Rojo</option>
+						</select>
+					</div>
+					{% csrf_token %}
+					<button type="submit" class="btn btn-outline-secondary">Cambiar Foto</button>
+				</fieldset>
+			</form>
+		</center>
+		<br>
+		<center><img src="/media/maguito1.png" width ="100px"></img>
+		<img src="/media/maguito2.png" width ="100px"></img>
+		<img src="/media/maguito3.png" width ="100px"></img></center>
+	</div>
+	<div class="col-md-5">
+		<center><h2><p class="text-muted">{{user.username}}</p></h2></center>
+		<center><img src="{{user.first_name}}" width ="350px"></img></center>
+	</div>
+	<div class="col-md-1"></div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<center><a href="http://diazstone.jorgediaz.site/home/"><button href="http://diazstone.jorgediaz.site/home/" class="btn btn-outline-secondary">Home</button></a></center>
+	</div>
+</div>
+{% endblock %}

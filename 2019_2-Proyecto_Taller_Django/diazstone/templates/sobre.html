@@ -1,0 +1,110 @@
+{% extends 'plant.html' %}
+
+{% block titulo %}
+<div class="row">
+	<div class="col-md-12">
+		<br>
+		<center><h2>Bienvenido {{username.username}}!</h2></center>
+	</div>
+</div>	
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+	
+	<div class="col-md-1">
+	</div>
+		
+	{% if a %}
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-4">
+		<br>
+		<br>
+		<br>
+		<br>
+		<form role = "form" method = "post">
+			<fieldset>
+				
+				<div class="form-group">
+					<select class="form-control" id="example" value=sobre name="sobre">
+						<option>1</option>
+						<option>5</option>
+						<option>10</option>
+						<option>15</option>
+						<option>20</option>
+					</select>
+				</div>
+				{% csrf_token %}
+				
+				<button type="submit" class="btn btn-outline-secondary" id = "login">Abrir Sobres</button>
+
+			</fieldset>
+		</form>
+	</div>
+	{% else %}
+	<div class="col-md-3">
+	{% for i in l1 %}
+
+		<center>
+			<div class="card border-secondary mb-3" style="max-width: 15rem;">
+				<div class="card-header">{{i.nombre}}</div>
+					<div class="card-body">
+					<center><img src={{i.imagen}} width ="125px"></img></center>
+				</div>
+			</div>
+		</center>
+
+	{% endfor %}
+	</div>
+	<div class="col-md-3">
+	{% for i in l2 %}
+
+		<center>
+			<div class="card border-secondary mb-3" style="max-width: 15rem;">
+				<div class="card-header">{{i.nombre}}</div>
+					<div class="card-body">
+					<center><img src={{i.imagen}} width ="125px"></img></center>
+				</div>
+			</div>
+		</center>
+
+	{% endfor %}
+	</div>
+	
+	{% endif %}
+	
+	<div class="col-md-4">
+		<center><img src="/media/vendedor.png" width ="225px"></img></center>
+	</div>
+	<div class="col-md-1">
+	</div>
+
+</div>
+{% if l1 %}
+<div class='row'>
+	<div class='col-md-2'>
+	</div>
+	<div class='col-md-4'>
+		<center>
+		<form role = "form" method = "post">
+			<fieldset>
+				
+				{% csrf_token %}
+				
+				<button type="submit" class="btn btn-outline-secondary" id = "login">Volver Abrir Sobres</button>
+
+			</fieldset>
+		</form>
+		</center>
+	</div>
+</div>
+{% endif %}
+
+<div class="row">
+	<div class="col-md-12">
+		<center><a href="http://diazstone.jorgediaz.site/home/"><button href="http://diazstone.jorgediaz.site/home/" class="btn btn-outline-secondary">Home</button></a></center>
+	</div>
+</div>
+
+{% endblock %}

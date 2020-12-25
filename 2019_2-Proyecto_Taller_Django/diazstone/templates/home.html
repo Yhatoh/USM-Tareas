@@ -1,0 +1,71 @@
+{% extends 'plant.html' %}
+
+{% block titulo %}
+<div class="row">
+	<div class="col-md-12">
+		<br>
+		<center><h2>Bienvenido nuevamente {{usuario.username}}</h2></center>
+		<center><h3>{{time}}</h3></center>
+	</div>
+</div>	
+
+{% endblock %}
+
+
+{% block contenido %}
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-5">
+		<div class="row">
+			<div class="col-md-3">
+				
+			</div>
+			<div class="col-md-9">
+				<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="juegito" name="juegito">
+					<button type="submit" class="btn btn-outline-secondary" style="width: 200px">Jugar</button>
+				</form>
+				<br>
+				<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="cartas" name="cartas">
+					<button type="submit" class="btn btn-outline-secondary" style="width: 200px">Mazo</button>
+				</form>
+				<br>
+				<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="equipos" name="equipos">
+					<button type="submit" class="btn btn-outline-secondary" style="width: 200px">Equipos</button>
+				</form>
+				<br>
+				<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="sobres" name="sobres">
+					<button type="submit" class="btn btn-outline-secondary" style="width: 200px">Sobres</button>
+				</form>
+				<br>
+				<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="perfil" name="perfil">
+					<button type="submit" class="btn btn-outline-secondary" style="width: 200px">Perfil</button>
+				</form>
+				<br>
+				<a href="http://diazstone.jorgediaz.site/info/"><button type="button" class="btn btn-outline-secondary" style="width: 200px">Sobre Diazstone</button></a>
+				<br>
+				<br>
+				<form method="POST" role ="form" action= ".">
+				{% csrf_token %}
+					<input type="hidden" value="logout" name="cerrar">
+					<button type="submit" class="btn btn-outline-secondary" style="width: 200px">Salir</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<center><img src="{{user.first_name}}" width ="350px"></img></center>
+	</div>
+	<div class="col-md-1"></div>
+		
+</div>
+{% endblock %}

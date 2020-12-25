@@ -1,0 +1,119 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Taller de Proyectos Web</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+  	<style>
+        body { overflow-x: hidden; }
+    </style>
+</head>
+<body class="body">
+	{% block titulo %}
+	<div class="row">
+		<div class="col-md-12">
+			<br>
+			<center><h2> Bienvenidos a Diazstone </h2></center>
+		</div>
+	</div>
+	{% endblock %}
+
+	{% block contenido %}
+
+	{% if registro %}
+
+		<div class="row">
+		<div class="col-md-6">
+			<center><img src="/media/cartainicio.png" width ="450px"></img></center>
+		</div>
+		<div class="col-md-6">
+			<form role = "form" method = "post">
+				<fieldset>
+					<legend>Registrate</legend>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Username</label>
+						<input type="username" class="form-control" name = "nusername" placeholder="Enter username">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						<input type="password"	 class="form-control" id="exampleInputPassword1" name = "npassword" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						<input type="password"	 class="form-control" id="exampleInputPassword1" name = "npassword2" placeholder="Repetir Password">
+					</div>
+					{% if yacreado %}
+					<p class="text-warning">Este usuario ya esta creado, prueba con otro!</p>
+					{% endif %}
+					{% if contraequiv %}
+					<p class="text-warning">Las contraseñas que ingresaste no son iguales!</p>
+					{% endif %}
+					
+					{% csrf_token %}
+					<button type="submit" class="btn btn-outline-secondary" id = "login" style="width: 249px">Registrarse</button>
+
+				</fieldset>
+			</form>
+			<br>
+			<form role = "form" method = "post">
+				{% csrf_token %}
+				
+					<input type="hidden" value="conectt" name="conectt">
+					<button type="submit" class="btn btn-outline-secondary" id = "reg" style="width: 249px">Conectarse</button>
+			</form>
+
+		</div>
+	</div>
+	{% else %}
+
+	
+	<div class="row">
+		<div class="col-md-6">
+			<center><img src="/media/cartainicio.png" width ="450px"></img></center>
+		</div>
+		<div class="col-md-6">
+			<form role = "form" method = "post">
+				<fieldset>
+					<legend>Conectate</legend>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Username</label>
+						<input type="username" class="form-control" name = "username" placeholder="Enter username">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						<input type="password" class="form-control" id="exampleInputPassword1" name = "password" placeholder="Password">
+					</div>
+					{% csrf_token %}
+					<button type="submit" class="btn btn-outline-secondary" id = "login" style="width: 249px">Conectarse</button>
+
+
+				</fieldset>
+			</form>
+
+
+			<form role = "form" method = "post">
+				{% csrf_token %}
+				<br>
+					<input type="hidden" value="reg" name="regi">
+					<button type="submit" class="btn btn-outline-secondary" id = "reg" style="width: 249px">Registrarse</button>
+			</form>
+
+		</div>
+	</div>
+	
+	{% endif %}
+	{% endblock %}
+
+	
+
+	{% block footer %}
+	<div class="modal-footer">
+		<div class="col-md-12">
+			<center><h6>Gabriel Carmona - Jorge Ludueña</h6></center>
+		</div>
+	</div>
+	{% endblock %}
+</body>

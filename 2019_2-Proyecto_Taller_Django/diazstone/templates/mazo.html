@@ -1,0 +1,68 @@
+{% extends 'plant.html' %}
+
+{% block titulo %}
+<div class="row">
+	<div class="col-md-12">
+		<br>
+		<center><h2>Tus Cartas</h2></center>
+	</div>
+</div>	
+{% endblock %}
+
+{% block contenido %}
+
+<div class="row">
+<div class='col-md-4'>
+{% for i in lista2 %}
+<center>
+	<div class="card border-secondary mb-3" style="max-width: 20rem;">
+		<div class="card-header">{{i.carta.nombre}}</div>
+			<div class="card-body">
+			<center><img src={{i.carta.imagen}} width ="200px"></img></center>
+			<br>
+			<p class="card-text">{{i.carta.lore}}</p>
+		</div>
+	</div>
+</center>
+{% endfor %}
+</div>
+
+<div class='col-md-4'>
+{% for i in lista3 %}
+<center>
+	<div class="card border-secondary mb-3" style="max-width: 20rem;">
+		<div class="card-header">{{i.carta.nombre}}</div>
+			<div class="card-body">
+			<center><img src={{i.carta.imagen}} width ="200px"></img></center>
+			<br>
+			<p class="card-text">{{i.carta.lore}}</p>
+		</div>
+	</div>
+</center>
+{% endfor %}
+</div>
+
+<div class='col-md-4'>
+{% for i in lista %}
+<center>
+	<div class="card border-secondary mb-3" style="max-width: 20rem;">
+		<div class="card-header">{{i.carta.nombre}}</div>
+			<div class="card-body">
+			<center><img src={{i.carta.imagen}} width ="200px"></img></center>
+			<br>
+			<p class="card-text">{{i.carta.lore}}</p>
+		</div>
+	</div>
+</center>
+{% endfor %}
+</div>
+
+</div>
+<div class="row">	
+	<div class="col-md-12">
+		<center><a href="http://diazstone.jorgediaz.site/home/"><button href="http://diazstone.jorgediaz.site/home/" class="btn btn-outline-secondary">Home</button></a></center>
+		
+	</div>
+</div>
+
+{% endblock %}
