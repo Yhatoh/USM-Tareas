@@ -1,0 +1,6 @@
+5
+f(x)=l(x)+3*(h(x)-2)*123-i(x)*soyfuncion(x)/1
+l(x)=h(x)*i(x)+24503
+h(x)=123+x-123*x+4
+i(x)=(1-1+1-1+1-1+1-1+1)*h(x)+soyfuncion(x)
+soyfuncion(x)=x+x*x+x*x+x

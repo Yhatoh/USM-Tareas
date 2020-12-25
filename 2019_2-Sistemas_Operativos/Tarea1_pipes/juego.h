@@ -1,0 +1,1 @@
+int puedojugarla(char* carta);
