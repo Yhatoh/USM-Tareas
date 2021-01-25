@@ -1,0 +1,506 @@
+\documentclass[letter, 10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[top=3cm,bottom=3cm,left=3.5cm,right=3.5cm,footskip=1.5cm,headheight=1.5cm,headsep=.5cm,textheight=3cm]{geometry}
+\usepackage{changepage}
+\usepackage{caption}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\captionsetup[table]{name=Tabla }
+
+\begin{document}
+\title{Inteligencia Artificial \\ \begin{Large}Informe Final: Problema de localizaci\'on de desfibriladores externos autom\'aticos\end{Large}}
+\author{Gabriel Carmona}
+\date{\today}
+\maketitle
+
+
+%--------------------No borrar esta secci\'on--------------------------------%
+\section*{Evaluaci\'on}
+
+\begin{tabular}{ll}
+Mejoras 1ra Entrega (10\%): &  \underline{\hspace{2cm}}\\
+C\'odigo Fuente (10\%): &  \underline{\hspace{2cm}}\\
+Representaci\'on (15\%):  & \underline{\hspace{2cm}} \\
+Descripci\'on del algoritmo (20\%):  & \underline{\hspace{2cm}} \\
+Experimentos (10\%):  & \underline{\hspace{2cm}} \\
+Resultados (10\%):  & \underline{\hspace{2cm}} \\
+Conclusiones (20\%): &  \underline{\hspace{2cm}}\\
+Bibliograf\'ia (5\%): & \underline{\hspace{2cm}}\\
+ &  \\
+\textbf{Nota Final (100)}:   & \underline{\hspace{2cm}}
+\end{tabular}
+%---------------------------------------------------------------------------%
+
+\begin{abstract}
+El problema de localizaci\'on de desfibriladores externos autom\'aticos consiste en posicionar desfibriladores externos autom\'aticos en ciertos puntos de la ciudad de forma de maximizar el recubrimiento de lugares donde hayan ocurrido paros card\'iacos, este problema tiene ciertas variantes dependiendo de que se disponga para resolver al problema. Este problema al tener relaci\'on con la salud de las personas se ha vuelto importante, por lo que se ha estudiado a lo largo de la historia. Este documento plantea el origen del problema, distintas variantes por las cuales ha pasado y m\'etodos que han utilizado para resolverlo, adem\'as de mostrar un modelo matem\'atico con el fin de solucionarlo, junto a una representaci\'on y un algoritmo que lo utilice. Para finalmente, obtener resultados del algoritmo creado, concluir respecto al trabajo realizado e indicar que hacer a futuro.
+\end{abstract}
+
+\section{Introducci\'on}
+Hoy en d\'ia a nivel mundial dentro del \'ambito de la salud, el poder aumentar la probabilidad de supervivencia de las personas es un foco de inter\'es y un problema significativo. Los paros card\'iacos fuera del hospital representan un problema grave: por ejemplo, en Estados Unidos en el a\~no 2014 murieron aproximadamente 424 mil personas debido a este problema \cite{Go}. De hecho, cuando a una persona le da un paro cardiaco en Estados Unidos, seg\'un la estad\'istica tiene un 9.6\% de probabilidades de sobrevivir o ser reanimado \cite{Nurnber}, y derechamente la mayor\'ia de los casos de paros card\'iacos fuera del hospital no logran sobrevivir debido principalmente a la falta de desfibriladores externos autom\'aticos (DEA) cerca de la zona \cite{Grasner}. Entonces, tomando en cuenta esta problem\'atica, se propone como idea poder permitir un f\'acil acceso a DEA en caso de cualquier emergencia fuera de un hospital, por lo cual se busca encontrar la mejor manera de posicionar los DEA de tal forma que se cubra las zonas donde hay un mayor registro de paros card\'iacos. 
+
+Para esto, en este trabajo se definir\'a el problema, indicando las variables y restricciones junto a las variantes m\'as conocidas. Luego, se revisar\'a lo que se ha realizado hist\'oricamente con el problema, incluyendo las t\'ecnicas y algoritmos que se han utilizado para resolverlo. Posterior a esto, se definir\'an dos modelos matem\'aticos de este problema, mostrando las particularidades de cada uno. Finalmente se ilustrar\'a una representaci\'on y describir\'a un algoritmo que permita solucionar una variante del problema. Indicando los experimentos que se realizar\'an y luego mostrando los resultados obtenidos. Para finalmente, poder concluir respecto al trabajo realizado e indicar qu\'e se podr\'ia realizar a futuro.
+
+
+\section{Definici\'on del Problema} 
+
+La problem\'atica que aborda la presente investigaci\'on es la localizaci\'on de dispositivos DEAs en puntos estrat\'egico de la ciudad, fuera del hospital. Para esto, se obtiene la informaci\'on de d\'onde ocurren paros card\'iacos en una zona urbana y seg\'un esta informaci\'on, y teniendo en cuenta que el radio de descubrimiento de los DEAs es de 100 metros, se busca posicionar estos de manera que se cubra la mayor cantidad de lugares donde han ocurrido paros card\'iacos dentro de la zona urbana \cite{Chan}. Los lugares puntales donde se posicionan los DEAs pueden ser de dos tipos; en primer lugar, un sitio donde ya hay un DEA, y en segundo lugar, un sito donde a\'un no existe un DEA, pero es posible candidato para poseer uno. Esta investigaci\'on se focalizar\'a en el problema de localizaci\'on de DEAs dentro de \'areas urbanas p\'ublicas, pero se cree importante recalcar que este mismo problem\'a se ha visto trabajado en interiores, debido a que en edificios, especialmente de car\'acter p\'ublico, este tema es cr\'itico \cite{Dao}.
+
+El problema descrito es equivalente al problema de ubicaci\'on de cubierta m\'axima, en el cual se busca maximizar la cantidad de poblaci\'on que pueda utilizar un servicio dado \cite{Church}. De hecho, de este mismo se basa una de las dos variantes m\'as conocidas del problema, la cual considera que los DEAs ya situados no se pueden relocalizar, por lo que se consideran puntos fijos, provocando que solo se podr\'ian situar nuevos DEAs en puntos donde a\'un no se haya situado ninguno \cite{ChanDemir}. Aunque tambi\'en existe una variante donde se considera que se pueden mover DEAs ya puestos a otros puntos, y al realizar esto agrega un factor de presupuesto m\'aximo a gastar, debido a que el costo de mover o instalar un desfibrilador es distinto, por lo que ser\'ia un tema a considerar al momento de querer optimizar el problema \cite{Tierney}. En esta \'ultima variante, se considera que solo se pueden mover DEAs desde un punto ya fijado hacia un punto que no posee un DEA, y tambi\'en se empieza a considerar el movimiento de un DEA ya situado a uno que no posea, como variable del problema. Esto debido a que es distinto un DEA relocalizado que un DEA instalado. 
+
+Aunque estas variantes permitir\'ian resolver el problema, tienen un acercamiento poco real, ya que se considera que dentro del radio existe la misma probabilidad de que haya un paro card\'iaco. Por esto, una variante en la cual se considere la probabilidad de suceso de un paro card\'iaco conceder\'ia un acertamiento m\'as cercano a la realidad. Esta probabilidad es descrita en una variante del problema donde no se pueden mover las DEAs ya situadas, generando una funci\'on que permite modelar el comportamiento de este suceso basado en la distancia entre el lugar y el DEA situado. Adem\'as, se consideran tres instancias espec\'ificas: una en la cual hay m\'as de una persona para ayudar al sujeto, otra donde hay solo una persona, pero se encuentra en una mala posici\'on para ayudar y una \'ultima donde se encuentra solo una persona situada en una buena posici\'on \cite{ChanDemir}. Pero, aunque exista la variante, el hecho de ser probabil\'istico provoca que no haya una certeza de que ese DEA permita cubrir correctamente, pero de todas formas esto permite una mayor probabilidad de \'exito que si no se considera. 
+
+\section{Estado del Arte}
+El primer acercamiento de este problema se remonta al a\~no 1978, con la publicaci\'on del trabajo de Church y Revelle \cite{Church}. Si bien en su publicaci\'on no se habla exactamente de situar DEAs, s\'i se trabaja bajo el mismo concepto que presenta la problem\'atica. En esa instancia de habla del problema de ubicaci\'on de cubierta m\'axima (MCLP), en el cual se busca maximizar el cubrimiento de demanda de un servicio dado. Para ese modelo se utilizaron en un inicio algoritmos \textit{greedy}, que permit\'ian entregar una soluci\'on correcta y r\'apida, aunque tambi\'en se ocup\'o programaci\'on lineal de tal forma que se asegure encontrar  un valor \'optimo. Este \'ultimo enfoque tiene un problema ya que se consideran variables mayores o iguales a cero y no binarias como se da en el caso de los algoritmos \textit{greedy}. Para solucionar esto se aplica el m\'etodo \textit{branch and bound} para la situaci\'on en la cual entregue valores fraccionarios. 
+
+A partir de este trabajo se han realizado distintas variaciones del problema, buscando mayor variedad de opciones o una soluci\'on m\'as cercana a la realidad. Una de esas variantes se realiz\'o utilizando ciertas variables probabil\'isticas, para as\'i poder situar los DEAs de manera que la probabilidad de sobrevivir pueda ser m\'as alta \cite{ChanDemir}. De esto surgieron tres escenarios: en primer lugar, uno donde hay m\'ultiples personas para tomar el DEA y ayudar al sujeto, luego otros dos donde hay solo una persona, pero en un caso esta se encuentra lejos del DEA y en el otro se encuentra cerca del DEA. Estas tres situaciones, junto al modelo propuesto de MLCP, fueron testeadas utilizando un solver CPLEX presentando. Se concluy\'o que el modelo inicial MCLP es m\'as r\'apido en ejecucaci\'on que el resto de los modelos, pero al momento de analizar el cubrimiento de los datos de paros card\'iacos se mostr\'o que estos tres presentaron una gran mejora al momento de cubrir las zonas, en comparaci\'on con el modelo de MCLP \cite{ChanDemir}.
+
+Por otro parte, tambi\'en se han presentado trabajos en los cuales se ha estudiado el modelo probabil\'istico, aplic\'andole algoritmos de la generaci\'on de filas y otro de generaci\'on de filas y columnas. Se observa que el algoritmo de generaci\'on de filas y columnas tiene un rendimiento que escala muy bueno a medida que la cantidad de escenarios aumenta, por lo que hace bastante eficiente en comparaci\'on al m\'etodo utilizando una cl\'asica programaci\'on lineal mixta y el algoritmo de generaci\'on de filas para poder resolver el problema \cite{Chan3}.
+
+Otro m\'etodo que se ha utilizado para poder resolver este problema es la utilizaci\'on de un conjunto de datos muy grande, que es dividido aleatoriamente en cinco partes. Se resuelve primeramente el problema para una parte de las divisiones, utilizando este conjunto a modo de entrenamiento. Luego se utiliza el resto de conjuntos para probar que tal estuvo la resoluci\'on encontrada con la data de entrenamiento. Este proceso es llamado la validaci\'on cruzada de k iteraciones, y logra demostrar que el modelo con posibilidad de mover los desfibriladores ya fijados permitir\'ia un mejor cubrimiento de los paros card\'iacos que el modelo sin la posibilidad de mover los DEAs \cite{Tierney}.
+
+Dentro de estas dos \'ultimas t\'ecnicas mostradas, se incluye el uso de algoritmos g\'eneticos, los cuales se benefician cuando en el problema no busca maximizar el cubrimiento, sino m\'as bien minimizar el n\'umero de DEAs instalados. Para este caso se ha utilizado el algoritmo g\'enetico  llamado NSGA-II, que le permite mejorar no solo tiempo sino que tambi\'en resultado \cite{Bonnet}.
+
+De esta forma, seg\'un lo explicado anteriormente se puede tener en cuenta que de los algoritmos con mejor resultado encontrados han sido el algoritmo de generaci\'on de columnas y filas, y la resoluci\'on del modelo de posici\'on flexible resuelto con programaci\'on lineal mixta y el uso de NSGA-II.
+
+\section{Modelo Matem\'atico}
+\subsection{Modelo basado en MCLP}
+Se definir\'a el modelo en base al MCLP mencionado anteriormente. Para esto, inicialmente se tienen que definir los siguientes par\'ametros del problema, puesto que son datos que vienen entregados para el desarrollo del problema.
+
+\begin{align*}
+    I_{e}: & \quad \text{conjunto de lugares donde hay un DEA instalado}\\
+    I_{c}: & \quad \text{conjunto de lugares candidatos para instalar un nuevo DEA}\\
+    I: & \quad I_{e} \cup I_{c} \text{ conjunto de tama\~no $m$}\\
+    J: & \quad \text{conjunto de tama\~no $n$ lugares donde ha ocurrido un paro card\'iaco}\\
+    a_{ij} = & \begin{cases}
+    1 & \text{si es que el paro card\'iaco en el lugar $j$ es cubierto por el radio del $i$}\\
+    0 & \text{si no}
+    \end{cases}
+\end{align*}
+
+Ahora, se pueden definir las siguientes variables del problema que ser\'an utilizadas para poder desarrollar la funci\'on objetivo m\'as adelante, y las restricciones a las que se va a ver enfrentado el problema.
+
+\begin{align*}
+    x_{j} = & \begin{cases}
+    1 & \text{si es que el paro card\'iaco en el lugar $j$ esta cubierto}\\
+    0 & \text{si no}
+    \end{cases}\\
+    y_{i} = & \begin{cases}
+    1 & \text{si un DEA esta instalado en el lugar $i$}\\
+    0 & \text{si no}
+    \end{cases}\\
+    z_{ij} = & \begin{cases}
+    1 & \text{si un DEA instalado en el lugar $i$ es usado para cubrir el paro card\'iaco en el lugar $j$}\\
+    0 & \text{si no}
+    \end{cases}\\
+\end{align*}
+
+\begin{align}
+    \text{maximizar } f =& \sum_{j \in J} x_j
+\end{align}
+
+La funci\'on objetivo lo que busca es maximizar la cantidad de paros cardiacos cubiertos seg\'un su posici\'on $j$. 
+
+Ahora se pasar\'an a formular las siguientes restricciones para poder representar de mejor forma el problema.
+
+\begin{align}
+    \sum_{i \in I_{c}} y_{i} \leq & N\\
+    y_{i} =& 1, \forall i \in I_{e}\\
+    z_{ij} \leq& a_{ij} \cdot y_{i}, \forall i \in I, j \in J\\
+    x_{j} =& \sum_{i \in I} z_{ij}, \forall j \in J\\
+    x_{j}, y_{i}, z_{ij} \in& \{0,1\}, \forall i \in I, j \in J
+\end{align}
+
+La restricci\'on (2) define que solo se puedan instalar una cantidad m\'axima de $n$ DEAs, esto es debido a que como la cantidad de lugares donde ha ocurrido un paro card\'iaco son $n$, entonces tener m\'as de $n$ DEAs ser\'ia contraproducente ya que podr\'ia suceder que al instalar una cantidad gigantesca de DEAs se resuelva el problema. La restricci\'on (3) sirve para fijar todos los puntos que tienen instalado un DEA en el lugar $i$, por ende es imposible que valga 0. La restricci\'on (4) permite asegurar que un DEA puede ser usado para cubrir el paro card\'iaco en el lugar $j$ solo si es que ese lugar se encuentra cubierto por el radio desde $i$. La restricci\'on (5) permite fijar la variable $x_j$ en 1 cuando el paro card\'iaco en $j$ est\'e cubierto por alg\'un DEA en la posici\'on $i$, y 0 en cualquier otro caso. Y la  restricci\'on (6) representa el dominio de las tres variables definidas, que corresponden a variables binarias \cite{ChanDemir} \cite{Church}.
+
+\subsection{Modelo que permite mover DEAs instalados}
+
+En esta secci\'on, se plantear\'a un modelo basado igualmente en MCLP, pero con ciertas modificaciones de tal forma que permita tener las posibilidad de mover los DEA de posici\'on a otro puesto. Para esto de considera un costo asociado a mover un DEA desde una posici\'on a otra y un costo asociado a instalar un nuevo DEA  con un presupuesto m\'aximo. Por esto, a los par\'ametros pasados se la dos nuevos.
+
+\begin{align*}
+    I_{e}: & \quad \text{conjunto de lugares donde hay un DEA instalado}\\
+    I_{c}: & \quad \text{conjunto de lugares candidatos para instalar un nuevo DEA}\\
+    I: & \quad I_{e} \cup I_{c} \text{ conjunto de tama\~no $m$}\\
+    J: & \quad \text{conjunto de tama\~no $n$ lugares donde ha ocurrido un paro card\'iaco}\\
+    CE: & \quad \text{costo unitario de mover un DEA de una posici\'on en } I_{e} \text{ a otra en } I_{c}\\
+    CN: & \quad \text{costo unitario de instalar un DEA en una posici\'on en } I_{c}\\
+    B: & \quad \text{presupuesto total para la instalaci\'on o cambio de posici\'on de los DEAs}\\
+    a_{ij} = & \begin{cases}
+    1 & \text{si es que el paro card\'iaco en el lugar $j$ es cubierto por el radio del $i$}\\
+    0 & \text{si no}
+    \end{cases}
+\end{align*}
+
+Tambi\'en, al tener esta nueva instancia donde un DEA puede moverse de lugar, se definir\'a una variable extra con respecto al modelo anterior de forma de poder representar ese movimiento. Admem\'as, se modificar\'a la variable $y_{i}$ para as\'i diferenciar correctamente entre un DEA trasladado y otro nuevo instalado.
+
+\begin{align*}
+    x_{j} = & \begin{cases}
+    1 & \text{si es que el paro card\'iaco en el lugar $j$ esta cubierto}\\
+    0 & \text{si no}
+    \end{cases}\\
+    y_{i} = & \begin{cases}
+    1 & \text{si se instala un nuevo DEA en el lugar $i$ o bien ya hay un DEA instalado}\\
+    0 & \text{si no}
+    \end{cases}\\
+    z_{ij} = & \begin{cases}
+    1 & \text{si un DEA instalado en el lugar $i$ es usado para cubrir el paro card\'iaco en el lugar $j$}\\
+    0 & \text{si no}
+    \end{cases}\\
+    v_{ik} = & \begin{cases}
+    1 & \text{si un DEA en la ubicaci\'on $i$ se mueve a la ubicaci\'on $k$}\\
+    0 & \text{si no}
+    \end{cases}
+\end{align*}
+
+Aunque se agregue esta variante de poder mover dispositivos de un lado a otro, de todas formas la funci\'on objetivo ser\'a la misma que en el caso anterior, que corresponde a cubrir la mayor cantidad de lugares en donde haya ocurrido un paro card\'iaco.
+
+\begin{align}
+    \text{maximizar } f =& \sum_{j \in J} x_j
+\end{align}
+
+Ahora, debido a esta variante se agregaran ciertas restricciones para poder cumplir con lo explicitado con la variante actual.
+
+\begin{align}
+    z_{ij} \leq& a_{ij} \cdot y_{i} + a_{ij}\cdot \sum_{k \in I} v_{ki}, \forall i \in I, j \in J\\
+    y_{i} =& 1 - \sum_{k \in I_{c}} v_{ik}, \forall i \in I_{e}\\
+    y_{i} =& 1 - \sum_{k \in I_{e}} v_{ki}, \forall i \in I_{c}\\
+    v_{ik} =& 0, \forall i \in I, k \in I_{e}\\
+    x_{j} =& \sum_{i \in I} z_{ij}, \forall j \in J\\
+    B \geq&\sum_{i \in I_{e}} \sum_{k \in I_{c}} v_{ik} \cdot CE + y_{i}\cdot(1 - v_{ik}) \cdot CN\\
+    x_{j}, y_{i}, z_{ij} \in& \{0,1\}, \forall i \in I, j \in J
+\end{align}
+
+La restricci\'on (8) permite asegurar que un DEA instalado en $i$ o movido de $k$ hacia $i$ puede ser usado para cubrir el paro card\'iaco en el lugar $j$ solo si es que ese lugar se encuentra cubierto por el radio desde $i$. La restricci\'on (9) permite que, si un DEA que estaba instalado de antes se movi\'o a alg\'un lugar donde no hab\'ia DEA, entonces $y_{i}$ va a valer 0. Y, en el caso de que no se haya movido entonces quiere decir que sigue en $i$, por lo que va a valer 1. La restricci\'on (10) permite decir que en los lugares nuevos donde no hab\'ia DEA se instale o venga de alg\'un otro lado, pero no ambas a la vez. La restricci\'on (11) asegura que solo se pueden mover DEAs desde un lugar en $I_{e}$ hacia $I_{c}$. La restricci\'on (12) posibilita que la variable $x_{j}$ valga 1 si est\'a cubierta por alg\'un DEA. La restricci\'on (13) es la que limita el gasto de mover o instalar DEAs al presupuesto m\'aximo dado, donde si es que se movi\'o un DEA desde $i$ hasta $k$, entonces se considera el costo unitario de mover un DEA, y si es que se instalo un nuevo DEA se considera el costo unitario de instalarlo \cite{Tierney}.
+
+\section{Representaci\'on}
+%Representaci\'on de \textbf{soluciones} (arreglos, matrices, etc.). En caso de t\'ecnicas completas indicar variables y dominios. Incluir justificaci\'on y ejemplos para mayor claridad.
+
+Para este caso, se va a resolver el problema representado por el modelo que permite mover DEAs instalados previamente. Adem\'as se considerar\'an como lugares candidatos para instalar nuevos DEAs, los mismos lugares donde han ocurridos paros card\'iacos (OHCA).
+
+Con el fin de resolver el problema se decidi\'o representar las soluciones a trav\'es de un arreglo de n\'umeros, donde cada posici\'on es un DEA y el valor que se almacena corresponde a la posici\'on en que se instalar\'a ese DEA, este valor ir\'a de $0$ hasta la cantidad de posiciones posibles. Donde, $0$ corresponde a la coordenada n\'umero $0$, $1$ corresponde a la coordenada n\'umero $1$ y as\'i. El tama\~no de este arreglo ser\'a basado en cuantos DEA puede instalar a lo m\'as con el presupuesto dado.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    indice & 0 & 1 & 2 & 3\\
+    \hline
+    valor & 4 & 1 & 7 & 3\\
+    \hline
+    \end{tabular}
+    \caption{Ejemplo de representaci\'on sin DEA instalado previamente con presupuesto 4, donde el coste de instalar un DEA es 1.}
+    \label{tab:ejemplo1}
+\end{table}
+
+En el ejemplo de la tabla \ref{tab:ejemplo1} se puede observar un arreglo de tama\~no 4 puesto que el presupuesto es 4, tambi\'en que el DEA $0$ se instal\'o en la posici\'on $4$, el DEA $1$ se instal\'o en la posici\'on $1$, el DEA $2$ se instal\'o en la posici\'on $7$ y el DEA $3$ se instal\'o en la posici\'on $3$. Ahora bien, en el caso de que ya hayan DEA instalados, el arreglo no necesitar\'a modificar su estructura para representarlos, no obstante, el total de DEA ser\'a igual a la suma de los DEA previamente instalados m\'as la cantidad de DEA que se puedan instalar con el presupuesto. Como se observa en la tabla \ref{tab:ejemplo2} donde los primeros dos DEA ser\'ian los ya instalados y el resto corresponder\'ia a los DEA que se podr\'ian instalar si es que se gasta todo el presupuesto en instalar DEA
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    indice & 0 & 1 & 2 & 3 & 4 & 5\\
+    \hline
+    valor & 4 & 1 & 7 & 3 & 10 & 2\\
+    \hline
+    \end{tabular}
+    \caption{Ejemplo de representaci\'on con 2 DEA instalados previamente con presupuesto 4, donde el coste de instalar un DEA es 1.}
+    \label{tab:ejemplo2}
+\end{table}
+
+Esta representaci\'on es apropiada para resolver el problema puesto que permite mostrar las soluciones del problema indicando donde se instalar\'an los DEAs, adem\'as que representar de esta forma permite beneficiarse del hecho de que generalmente la cantidad de puntos donde se pueden instalar DEAs es mayor a la cantidad de DEAs que se pueden instalar debido a que el presupuesto es un recurso limitado. Entonces, si es que la representaci\'on fuera, un arreglo donde cada \'indice corresponde a una posici\'on y el valor indicar\'ia si es que voy a poner un DEA en el punto o no, dar\'a un tama\~no de espacio de b\'usqueda de $2^{n}$, donde $n$ es la cantidad de puntos donde se pueden instalar DEA. Pero con la representaci\'on ofrecida el tama\~no de espacio de b\'usqueda se reduce a $n^{instalados + prespuesto / coste\_de\_instalar}$, donde si bien $n$ es mayor a $2$, la potencia a la cual se esta elevando es inferior debido a esa caracter\'istica de recurso limitado dado anteriormente, siendo as\'i una representaci\'on que beneficia a la resoluci\'on del problema. Para este problema se decide instanciar las variables con el orden siguiente: primero los DEAs ya instalados y despu\'es los nuevos DEAs nuevos que se pueden instalar. Esto es debido a que los DEAs ya instalados ya consideran como un valor inicial, entonces primero se intentar\'a dejar los DEAs ya instalados donde estaban y luego se intentaran mover.
+
+\section{Descripci\'on del algoritmo}
+%C\'omo fue implementada la soluci\'on. Interesa la implementaci\'on particular m\'as que el algoritmo gen\'erico, es decir, si se tiene que implementar SA, lo que se espera es que se explique en pseudoc\'odigo la estructura
+%general y en p\'arrafos explicativos c\'omo fue implementada cada parte para su problema particular. Si se utilizan operadores/movimientos se debe justificar por qu\'e se utilizaron dichos operadores/movimientos. 
+%En caso de una t\'ecnica completa, describir detalles relevantes del proceso, si se utiliza recursi\'on o no, explicar c\'omo se van construyendo soluciones, cu\'ando se revisan restricciones, c\'omo se registran conflictos, etc. En este punto no se espera que se incluya c\'odigo, eso va aparte.
+
+El algoritmo que se implement\'o, utilizando la representaci\'on antes mencionada, utiliza las t\'ecnicas de Forward Checking y CBJ. Donde la primera t\'ecnica se encargar\'a de reducir el dominio de las variables que faltan por instanciar cuando alguna fue instanciada y el segundo para poder realizar un retorno guiado a base de los conflictos de restricciones cuando este no pueda instanciar m\'as. 
+
+
+\begin{algorithm}[h!]
+\SetAlgoLined
+\SetKwRepeat{Repeat}{repeat}{until}
+\SetKwFunction{DRP}{DRP}
+\SetKwFunction{FC}{FC}
+\SetKwFunction{CBJ}{CBJ}
+\SetKwFunction{Return}{return}
+\KwResult{Encontrar las posiciones que permita cubrir \'optimamente los puntos OHCA}
+\KwData{$dondeInstalarOptimo$, $maxPuntosCubiertos$, $costeMaximo$, $posiblesPosiciones$, $presupuesto$, $costeDeMoverDEA$, $costeDeInstalarDEA$}
+\SetKwProg{DRPs}{Procedure}{}{end}
+\DRPs{\DRP{$DEAAInstanciar$, $DEAInstanciado$, $coste$, $puntosCubiertos$, $dondeInstalar$, $conf$}}{
+    \If{$DEAAInstanciar\text{ }!= 0$}{
+        $puntosCubiertos \gets$ puntos que son cubiertos al instanciar $DEAInstanciado$ en $dondeInstalar[DEAInstanciado]$
+        
+        $posiblesPosiciones \gets$ actualizar dominio con \FC{$DEAInstanciado$, $posiblesPosiciones$}
+    }
+        
+ \If{$presupuesto < coste$}{
+        $conf \gets $ actualizar conflictos de $DEAInstanciado$ debido a restricci\'on fallida \CBJ{$DEAInstanciado$}
+        
+        \Return $DEAInstanciado$
+    }
+    
+\If{$maxPuntosCubiertos < puntosCubiertos$}{
+     $dondeInstalarOptimo \gets dondeInstalar$
+        
+     $maxPuntosCubiertos \gets puntosCubiertos$
+        
+     $costeMaximo \gets coste$
+    }
+    
+\If{$DEAAInstanciar == largo(dondeInstalar)$}{
+        \Return $\text{ -1}$
+    }
+    
+    
+\If{$DEAAInstanciar$ ya estaba instanciado}{
+    $dondeInstalar[DEAAInstanciar] \gets$ valor donde ya esta instalado
+        
+    \DRP{$DEAAInstanciar + 1$, $DEAAInstanciar$, $coste$, $puntosCubiertos$, $dondeInstalar$, $conf$}
+}
+    
+\ForEach{$posicion \in posiblesPosiciones[DEAAInstanciar]$}{
+     $dondeInstalar[DEAAInstanciar] \gets posicion$
+
+     \eIf{$DEAAInstanciar$ ya estaba instalado}{
+         $DEAConConflicto \gets $\DRP{$DEAAInstanciar + 1$, $DEAAInstanciar$, $coste + costeDeMoverDEA$, $puntosCubiertos$, $dondeInstalar$, $conf$}
+        }{
+         $DEAConConflicto \gets $\DRP{$DEAAInstanciar + 1$, $DEAAInstanciar$, $coste + costeDeInstalarDEA$, $puntosCubiertos$, $dondeInstalar$, $conf$}
+        }
+        
+     \eIf{$DEAConConlicto$ no es $DEAAInstanciar$ $\&\&$ $DEAAInstancias$ esta en $conf[DEAConConlicto]$}{
+          limpiar $conf[DEAConConlicto]$
+        }{
+          \Return $DEAConConlicto$
+        }
+        
+        
+    }
+}
+\caption{Algoritmo que permite solucionar DRP}
+\end{algorithm}
+
+En el algoritmo 1, la data entregada tiene la siguiente descripci\'on:
+\begin{itemize}
+    \item $dondeInstalarOptimo$: corresponde a las posiciones de los DEA donde est\'a el \'optimo
+    \item $maxPuntosCubiertos$: la cantidad m\'axima de puntos cubiertos dado el posicionamiento \'optimo
+    \item $costeMaximo$: coste total de instalar o mover dado las posiciones del \'optimo
+    \item $posiblesPosiciones$: arreglo que contiene todas las posiciones posibles de cada DEA
+    \item $presupuesto$: presupuesto que se tiene para la instancia dada
+    \item $costeDeMoverDEA$: coste de mover un DEA ya instalado
+    \item $costeDeInstalarDEA$: coste de instalar un DEA nuevo
+\end{itemize}
+
+Adem\'as, se puede observar estructuras reconocibles donde de la l\'inea $2$ a $5$ se suma la nuevos puntos cubiertos y se aplica Forward Checking, implementado seg\'un el algoritmo 2, donde esta t\'ecnica saca del conjunto de posibles posiciones de un DEA toda posici\'on ya utilizada. Luego de l\'inea $6$ a $9$ se observa la revisi\'on se la restricci\'on dada por el presupuesto, donde al ser un generador de conflicto este agrega toda variable instancia anteriormente al conjunto de conflicto del DEA instanciado en este punto. Esto es debido a que el presupuesto es una restricci\'on que afecta a todas las variables instanciadas juntas. Entonces al tener relaci\'on con toda variable instanciada anteriormente, se agregan estas al conjunto de conflictos. Ahora en la l\'inea $10$ a $14$, esta corresponde a cuando se encuentra posiciones de tal forma que cubran m\'as puntos cubiertos que la soluci\'on actual. Luego le siguen las lineas $15$ a $17$, las cuales sirven en el caso que se hayan instanciados todas los DEAs posibles y no se haya pasado del presupuesto.
+
+Finalmente, comienza donde se instanciaran las variables, primero se revisa el caso especial donde el DEA a instanciar ya ha estado instalado, entonces se revisar\'a el caso que se deje en el mismo lugar, lo cual no cuesta nada. Despu\'es, por cada posible posici\'on del DEA se instanciar, donde al coste se le sumar\'a el coste de mover, si es que este DEA ya estaba instalado, o donde el coste ser\'ia sumar\'a el coste de instalara un nuevo DEA. Y si es que el DEA a instanciar recibe un DEA con conflicto que no es \'el, quiere decir que hubo un DEA que tuvo conflicto y no pudo instanciar m\'as, por lo tanto se revisa si es que el DEA a instanciar est\'a dentro del conjunto, ya que si es est\'a dentro quiere decir que es la variable m\'as reciente instanciada que tuvo conflicto con ese DEA, entonces se queda ah\'i y se limpia el conjunto. Si no se sigue retornando hasta que llegue a la variable correspondiente.
+
+
+\begin{algorithm}[h!]
+\SetAlgoLined
+\SetKwRepeat{Repeat}{repeat}{until}
+\SetKwFunction{DRP}{DRP}
+\SetKwFunction{FC}{FC}
+\SetKwFunction{CBJ}{CBJ}
+\SetKwFunction{Return}{return}
+\KwResult{Encontrar las posiciones que permita cubrir \'optimamente los puntos OHCA}
+\KwData{$posiblesPosiciones$, $DEAQuefaltanInstanciar$}
+\SetKwProg{FCs}{Procedure}{}{end}
+\FCs{\FC{$DEAAInstanciado$}}{
+  \ForEach{$DEA \in DEAQuefaltanInstanciar$}{
+     \ForEach{$posicion \in posiblesPosiciones$}{
+         \If{en $posicion$ ya esta siendo ocupada}{
+             sacar $posicion$ de $posiblesPosiciones$
+            }
+        }
+    }
+}
+\caption{Forward Checking implementado}
+\end{algorithm}
+
+El orden de instansaci\'on corresponder\'a a primero instanciar variables que correspondan DEAs previamente instalados y luego instanciar variables que correspondan a nuevos DEAs. Esto se realiza debido a que los DEAs previamente instalados es como si ya tuvieran un valor inicial por el cual se puede iniciar, entonces se comenzar\'ia a instanciar la soluci\'on con estos valores. Luego, hay dos momentos donde se revisan restricciones: cuando se aplica Forward Checking y al revisar el presupuesto. Esto es porque en el Forward Checking se reduce el dominio de las variables a instanciar, ya que se quitan toda posici\'on utilizada por alg\'un DEA instanciado previamente, porque no pueden haber dos DEA en la misma posici\'on. El presupuesto se revisa como restricci\'on que detiene el backtracking, ya que es un factor que limita la instanci\'on de DEA y donde se aplica el retorno guiado con la t\'ecnica CBJ.
+
+\section{Experimentos}
+%Se necesita saber c\'omo experimentaron, c\'omo definieron par\'ametros, 
+%c\'omo los fueron modificando, cu\'ales problemas/instancias se estudiaron y por qu\'e, etc. 
+%Recuerde que las t\'ecnicas completas son deterministas y las t\'ecnicas incompletas son estoc\'asticas.
+
+Para los experimentos, se decidi\'o dos grupos de instancias: uno que no contenga DEAs instalados previamente y con un presupuesto; otro que contenga DEAs instalados previamente y con un presupuesto igualmente. Adem\'as los puntos dentro del primer grupo son los mismo que dentro del segundo grupo, solo que el segundo tiene algunos puntos con DEAs instalados previamente. Esto es para poder comparar el comportamiento de la respuesta dentro del mismo conjunto de puntos, pero con la singularidad de poseer DEAs instalados previamente. 
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Nombre & Cantidad Coordenadas & Presupuesto & Radio de Cobertura\\
+    \hline
+    SJC324-3 & 324 & 3 & 800\\
+    \hline
+    SJC402-3 & 402 & 3 & 800\\
+    \hline
+    SJC500-3 & 500 & 3 & 800\\
+    \hline
+    SJC500-7 & 500 & 7 & 800\\
+    \hline
+    SJC708-5 & 708 & 5 & 800\\
+    \hline
+    SJC708-7 & 708 & 7 & 800\\
+    \hline
+    SJC708-11 & 708 & 11 & 800\\
+    \hline
+    
+    \end{tabular}
+    \caption{Caracter\'istica de las instancias utilizadas sin DEA instalado previamente}
+    \label{tab:caract}
+\end{table}
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Nombre & Cantidad Coordenadas & Presupuesto & Radio de Cobertura & Instalados Previamente\\
+    \hline
+    SJC324-3 & 324 & 2.2 & 800 & 1\\
+    \hline
+    SJC402-3 & 402 & 2.2 & 800 & 1\\
+    \hline
+    SJC500-3 & 500 & 2 & 800 & 1\\
+    \hline
+    SJC500-7 & 500 & 4 & 800 & 4\\
+    \hline
+    SJC708-5 & 708 & 4.2 & 800 & 1\\
+    \hline
+    SJC708-7 & 708 & 3.4 & 800 & 4\\
+    \hline
+    SJC708-11 & 708 & 7 & 800 & 5\\
+    \hline
+    
+    \end{tabular}
+    \caption{Caracter\'istica de las instancias utilizadas con DEAs instalados previamente}
+    \label{tab:caract}
+\end{table}
+
+Utilizando las instancias descritas en la tabla 3 y 4, se busca evaluar el tiempo que se demora en encontrar la soluci\'on m\'axima, en el caso que se demore un largo tiempo se tiene un tiempo de ejecuci\'on m\'axima de 6 horas, donde se tomar\'a la mejor soluci\'on hasta el momento. Y de la soluci\'on se observar\'a la cantidad de puntos cubiertos por la soluci\'on, cuantos DEAs fueron instalados, cuantos DEAs instalados previamente fueron reposicionados y el presupuesto restante.
+
+Todas las instancias descritas tienen como los casos de prueba utilizados en el trabajo  de Max-Covering de Lorena y Pereira \cite{Lorena}. Todos las instancias se ejecutaron dentro de una instancia de Amazon EC2 z1d con un procesador Intel(R) Xeon(R) Platinum 8151 CPU @3.40GHz. Y el calculo de tiempo de ejecuci\'on se obtiene utilizando el time sistema, donde el tiempo del algoritmo ser\'a user + sys. 
+\section{Resultados}
+%Qu\'e fue lo que se logr\'o con la experimentaci\'on, incluir tablas y gr\'aficos (lo m\'as explicativos posible).
+%Los resultados deben ser comentados y justificados en detalle en esta secci\'on.
+
+Para los resultados mostrados en la tabla 5 y 6 se muestra la siguiente informaci\'on:
+\begin{itemize}
+    \item \# Coords Cub: cantidad de coordenadas cubiertas donde han habido paros cardiacos
+    \item \% Coords Cub: porcentaje de coordenadas cubiertas donde han habido paros cardiacos
+    \item \$ Restante: presupuesto que sobra con la soluci\'on entregada
+    \item \# DEA I: cantidad de DEA nuevos intalados
+    \item \# DEA M: cantidad de DEA instaldos previamentes movidos
+    \item \% Cov: porcentaje de cobertura en el experimento de Lorena y Pereira
+    \item \# Instalaciones: cantidad de instalaciones realizadas en el experimento de Lorena y Pereira 
+\end{itemize}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    Nombre & \% Cov & \# Instalaciones & Tiempo Ejecuci\'on\\
+    \hline
+    SJC324-3 & 95.5\% & 3 & 5.33 s\\
+    \hline
+    SJC402-3 & 91.9\% & 3 & 11.09 s\\
+    \hline
+    SJC500-3 & 79.8\% & 3 & 16.42 s\\
+    \hline
+    SJC500-7 & 99.9\% & 7 & 85.58 s\\
+    \hline
+    SJC708-5 & 88.8\% & 5 & 54.65 s\\
+    \hline
+    SJC708-7 & 95.7\% & 7 & 74.65 s\\
+    \hline
+    SJC708-11 & 100.0\% & 11 & 207.51 s\\
+    \hline
+    
+    \end{tabular}
+    \caption{Resultados de las instancias seg\'un el experimento realizado por Lorena y Pereira \cite{Lorena}}
+    \label{tab:caract}
+\end{table}
+
+\begin{table}[h!]
+
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    Nombre & \# Coords Cub & \% Coords Cub & \$ Restante & \# DEA I & Tiempo Ejecuci\'on\\
+    \hline
+    SJC324-3 & 306 & 94.4\% & 0 & 3 & 2 m 52.174 s\\
+    \hline
+    SJC402-3 & 353 & 87.8\% & 0 & 3 & 5 m 37.132 s\\
+    \hline
+    SJC500-3 & 339 & 67.8\% & 0 & 3 & 9 m 46.651 s\\
+    \hline
+    SJC500-7 & 405 & 90.0\% & 0 & 7 & 6 horas\\
+    \hline
+    SJC708-5 & 488 & 68.9\% & 0 & 5 & 6 horas\\
+    \hline
+    SJC708-7 & 527 & 74.4\% & 0 & 7 & 6 horas\\
+    \hline
+    SJC708-11 & 521 & 73.6\% & 0 & 11 & 6 horas\\
+    \hline
+    
+    \end{tabular}
+    \caption{Resultados de las instancias sin DEA instalado previamente}
+    \label{tab:caract}
+\end{table}
+
+Comparando la tabla 5 y la tabla 6, se puede observar que los porcentajes de las 3 primeros instancias tuvieron valores coherentes consigo mismo, respecto a que la instancia SJC324-3 tuvo m\'as porcentaje que SJC402-3, y SJC402-3 tuvo m\'as porcentaje que SJC500-3. Los valores no son iguales puesto en los experimentos de la tabla 5 Lorena y pereira consideraron demandas para cada punto, en cambio en la tabla 6 para ser acorde al problema cada punto era considerado con demanda 1. Ahora bien, se puede obtener tambi\'en que los tiempos obtenidos en la tabla 5 son inferiores con creces respecto a los tiempos obtenidos en la tabla 6, hasta ah\'i casos en la tabla 6 donde las ultimas 4 instancias se tomaron un tiempo grande y no alcanzaron a terminar. Esto \'ultimo se debe principalmente a la t\'ecnica aplicada, ya que en la tabla 5 se ocupo una t\'ecnica heur\'istica para resolver el problema, en cambio en la tabla 6, que fueron los resultados obtenidos con el algoritmo descrito en la secci\'on anterior, el cual corresponde a una t\'ecnica de b\'usqueda completa.
+
+Ahora bien, con los resultados obtenidos en la tabla 7, comparandol\'o con la tabla 6, se puede observar ciertas situaciones interesantes. Primero, para las dos primeras instancias el DEA instalado previamente no estaba en una coordenada considerada en el \'optimo, entonces lo que realiza el algoritmo es moverlo, ya que el presupuesto lo permite, obteniendo as\'i el mismo porcentaje de cubertura en ambas situaciones. Lo mismo sucede para la segunda instancia. 
+
+\begin{table}[h!]
+    \hspace{-1.2cm}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    Nombre & \# Coords Cub & \% Coords Cub & \$ Restante & \# DEA I  & \# DEA M & Tiempo Ejecuci\'on\\
+    \hline
+    SJC324-3 & 306 & 94.4\% & 0 & 2 & 1 & 2 m 47.662 s\\
+    \hline
+    SJC402-3 & 353 & 87.8\% & 0 & 2 & 1 & 5 m 35.682 s\\
+    \hline
+    SJC500-3 & 308 & 61.6\% & 0 & 2 & 0 & 10 m 15.591 s\\
+    \hline
+    SJC500-7 & 472 & 94.4\% & 0 & 4 & 0 & 6 horas\\
+    \hline
+    SJC708-5 & 492 & 69.4\% & 0.2 & 4 & 0 & 6 horas\\
+    \hline
+    SJC708-7 & 499 & 70.5\% & 0.2 & 3 & 1 & 6 horas\\
+    \hline
+    SJC708-11 & 592 & 83.6\% & 0 & 7 & 0 & 6 horas\\
+    \hline
+    
+    \end{tabular}
+    \caption{Resultados de las instancias con DEAs instalados previamente}
+    \label{tab:caract}
+\end{table}
+
+
+Segundo, en el caso del que presupuesto sea un limitante se observa lo que sucede en la instancia SJC500-3 debido a que al tener un presupuesto inferior a la instancia de la tabla 6, este opta por dejar el DEA instalado donde estaba y instalar dos DEA nuevos, provocando as\'i que el porcentaje de cobertura haya disminuido, puesto que solo pod\'ian instalar dos DEA nuevos y el DEA instalado previamente no se puede mover.
+
+Adem\'as, se puede observar que en las ultimas cuatro instancias de la tabla 6 y 7, las cuales son instancias que no alcanzaron a llegar al \'optimo, solo en dos de esas en la tabla 7 entreg\'o un resultado peor que el indicado en la tabla 6, y estas dos tienen un presupuesto restante de $0.2$, por lo que si el tiempo de ejecuci\'on hubiese sido mayor, eventualmente hubiera reposicionado un DEA en otro punto de tal forma de aumentar su porcentaje de cubierta. En los otros dos casos donde la tabla 7 s\'uper en porcentaje de cubertura que la tabla 6, se puede observar que se quede a que ya hab\'ian DEA instalados y esos entregados un porcentaje no menor, entonces eso hace que dentro del mismo tiempo la instancia de la tabla 7 pueda observar m\'as formas de instalar nuevos DEAs manteniendo los ya instalados en su lugar.
+
+Por \'ultimo, los tiempos de la tabla 7 en los casos que llegaron a terminar son superiores a lo de la tabla 6. Esto se debe por lo explicado en la representaci\'on, que indica que tener DEAs instalado previamente, se agregan estos como extras haciendo que dentro de la misma instancia el tama\~no del espacio de b\'usqueda tengo para el caso con DEAs, ya instalados sea un poco mayor, provocando que el tiempo de ejecucaci\'on tengala diferencia mostrada.
+
+\section{Conclusiones}
+%Conclusiones RELEVANTES del estudio realizado. Incluir conclusiones acerca de la adecuaci\'on de la propuesta de soluci\'on al problema que se busca resolver. Listar y analizar ventajas y desventajas de la propuesta en base a los resultados obtenidos y comportamiento de la propuesta en diferentes escenarios (problemas/instancias/par\'ametros). Incluir trabajo futuro en base a las conclusiones.
+
+Para concluir, las t\'ecnicas expuestas resuelven el mismo problema, pero con ciertas diferencias puntuales, donde generalmente difieren en tomar en cuenta otros aspectos al momento de tener que relocalizar DEAs. Estas diferencias pueden ser no solo buscar el mayor cubrimiento de zonas, sino que tambi\'en minimizar la cantidad de dispositivos instalados, o tambi\'en considerar el radio como una funci\'on de probabilidad que permita indicar los resultados m\'as cercanos a la realidad. Aunque existan diferencias ente los modelos, todos tienen la limitaci\'on de los datos de entrada, debido a que si bien la cantidad de datos puede ser grande y decidir a base de estos, este proceso es bastante azaroso. Esto debido a que en verdad no se puede asegurar que los siguientes paros card\'iacos ir\'an ocurriendo nuevamente en esos mismos lugares, ya que pueden cambiar. Siguiendo con esto \'ultimo, una t\'ecnica que permitir\'ia disminuir con creces esta probabilidad, es realizar la validaci\'on cruzada de k iteraciones. Disminuir\'ia la probabilidad ya que esta t\'ecnica permite, despu\'es de fijar los DEAs, verificar c\'omo se comportar\'ian las localizaciones encontradas si se le pasan nuevos datos, de manera de poder discernir si est\'a correcta la soluci\'on o no.
+
+Ahora bien, con la propuesta realizada para solucionar el problema dado, se puede observar que las ventajas son que permite encontrar la respuesta \'optima exacta, ya que es una t\'ecnica de b\'usqueda completa y que se aprovecha correctamente de los datos de manera buscar el \'optimo por donde ser\'ia m\'as problema, como se pudo observar en las instancias analizadas de la tabla 6 y 7, donde al tenerlo representado de esa forma permit\'ia llegar en el mismo lapso de tiempo a soluciones mejores. 
+
+Por otra parte, las desventajas observadas son que toma tiene altos para resolver un sistema peque\~no, que la t\'ecnica de CBJ no es adecuada para el problema, debido a que el grafo de restricciones es completo, ya que el presupuesto es una restricci\'on donde todas las variables se afectan entre todas, por lo que no se aprovecha la t\'ecnica haciendo que el retorno guiado no sea \'util y que agregue complejidad extra al problema.
+
+Para el futuro, habr\'ia que buscar una t\'ecnica que permita mejorar los tiempo obtenidos y pueda acercarse a los valores \'optimos te\'oricos, por lo que se deber\'ia buscar alguna t\'ecnica heur\'istica que permita resolver este problema. Adem\'as analizar los datos de tal forma de no considerar solamente posiciones donde han habido paros card\'iacos, como se realizo en este caso, para ello habr\'ia que tener en consideraci\'on la cantidad de paros card\'iacos y sus posiciones, de manera de analizar estos datos y obtener un valor probabil\'istico que permita decidir con mejor precisi\'on donde posicionar un DEA.
+\bibliographystyle{plain}
+\bibliography{Referencias}
+
+\end{document} 
